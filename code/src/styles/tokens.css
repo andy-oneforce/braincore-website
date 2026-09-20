@@ -1,0 +1,85 @@
+/**
+ * ASIOS Website — Design Tokens
+ * Per 260907-009-gitbook-website-build-recommendation.md §5.1-5.3.
+ * Light theme lives in :root; dark theme overrides in [data-theme="dark"].
+ */
+
+:root {
+  /* Layout */
+  --header-height: 64px;
+  --sidebar-width: 280px;
+  --toc-width: 240px;
+  --content-max-width: 768px;
+  --gutter-desktop: 32px;
+  --gutter-mobile: 20px;
+  --space-base: 8px;
+
+  /* Typography */
+  --font-sans: Inter, system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-size-body: 16px;
+  --line-height-body: 1.75;
+  --font-size-title: 32px;
+  --font-size-description: 18px;
+  --font-size-h2: 24px;
+  --font-size-h3: 20px;
+  --font-size-sidebar-item: 14px;
+  --font-size-toc-item: 13px;
+
+  /* Colour — light theme */
+  --bg: #ffffff;
+  --bg-sidebar: #f7f7f8;
+  --text: #1f2328;
+  --text-muted: #59636e;
+  --border: #e5e7eb;
+  --accent: #346ddb;
+  --accent-bg: rgba(52, 109, 219, .08);
+  --code-bg: #f6f8fa;
+  --hint-info: #3b82f6;
+  --hint-success: #22c55e;
+  --hint-warning: #f59e0b;
+  --hint-danger: #ef4444;
+
+  /* Radius / shadow */
+  --radius-card: 8px;
+  --radius-button: 6px;
+  --radius-inline-code: 4px;
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, .06);
+  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, .08);
+
+  /* Marketing (§5.5) */
+  --marketing-container-max: 1200px;
+  --marketing-section-padding-desktop: 96px;
+  --marketing-section-padding-mobile: 56px;
+  --hero-heading-size: 56px;
+  --hero-heading-size-mobile: 32px;
+  --hero-heading-line-height: 1.1;
+  --grid-gap-desktop: 24px;
+  --grid-gap-mobile: 16px;
+  --logo-height-desktop: 40px;
+  --logo-height-mobile: 32px;
+
+  /* Scroll reveal (§5.7) */
+  --reveal-duration: 500ms;
+  --reveal-distance: 16px;
+  --reveal-stagger: 60ms;
+
+  /* Blog (§5.6) */
+  --tag-radius: 999px;
+}
+
+[data-theme="dark"] {
+  /* Colour — dark theme */
+  --bg: #1a1a1f;
+  --bg-sidebar: #1f1f24;
+  --text: #e6e6eb;
+  --text-muted: #9a9aa5;
+  --border: #2e2e36;
+  --accent: #4d7fe0;
+  --accent-bg: rgba(77, 127, 224, .14);
+  --code-bg: #0f0f12;
+  --hint-info: #3b82f6;
+  --hint-success: #22c55e;
+  --hint-warning: #f59e0b;
+  --hint-danger: #ef4444;
+}

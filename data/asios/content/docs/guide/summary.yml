@@ -1,0 +1,5 @@
+title: Guide
+nav:
+  - page: index.md
+    items:
+      - page: style-guide.md

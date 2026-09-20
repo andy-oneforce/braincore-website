@@ -1,0 +1,533 @@
+/**
+ * ASIOS Website — MarketingLayout
+ * Per 260907-009-gitbook-website-build-recommendation.md §4.3 (MarketingLayout) + §5.5.
+ * Full-bleed sections stacked vertically, no sidebar/TOC. Assumes tokens.css and base.css
+ * are loaded first; every value reads the §5.5 tokens (the literals are var() fallbacks).
+ * Shape follows the approved mockup Output/mockups/marketing-home.html.
+ */
+
+/* The UA's default 8px body margin would inset every band; base.css resets it for docs only. */
+body.marketing {
+  margin: 0;
+}
+
+/* Stack: sections fill the viewport width; nothing may scroll sideways. */
+.marketing main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow-x: clip;
+}
+
+/* Full-bleed band; the background spans the viewport, the .container inside holds the measure. */
+.marketing .section {
+  width: 100%;
+  min-width: 0;
+  padding: var(--marketing-section-padding-desktop, 96px) 0;
+  background: var(--bg);
+}
+
+.marketing .section > .container {
+  width: min(var(--marketing-container-max, 1200px), 100% - 2 * var(--gutter-desktop));
+  margin-inline: auto;
+  min-width: 0;
+}
+
+/* Alternating bands: --bg / --bg-sidebar. Hero and CTA banner override below (source order). */
+.marketing .section:nth-of-type(even) {
+  background: var(--bg-sidebar);
+}
+
+/* Full-bleed accent sections */
+.marketing .section.hero,
+.marketing .section.cta-banner {
+  background: var(--accent);
+  color: #fff;
+  text-align: center;
+}
+
+/* The base h1/h2/h3 rules are docs typography (border, top margin); reset them inside sections. */
+.marketing .section h1,
+.marketing .section h2,
+.marketing .section h3 {
+  margin-top: 0;
+  border-bottom: 0;
+}
+
+.marketing .hero h1 {
+  font-size: var(--hero-heading-size, 56px);
+  line-height: var(--hero-heading-line-height, 1.1);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+
+.marketing .hero .subheading {
+  max-width: 620px;
+  margin: 0 auto 32px;
+  font-size: 20px;
+  color: rgba(255, 255, 255, .85);
+}
+
+.marketing .cta-banner h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+/* CTA button: white-on-accent inside the accent sections, accent-on-white elsewhere. */
+.marketing .cta {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: var(--radius-button);
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  transition: box-shadow 150ms, transform 150ms;
+}
+
+.marketing .cta:hover {
+  text-decoration: none;
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-1px);
+}
+
+.marketing .hero .cta,
+.marketing .cta-banner .cta {
+  background: #fff;
+  color: var(--accent);
+}
+
+/* Feature grid: --columns comes from the section's inline style and inherits into the container. */
+.marketing .feature-grid > .container {
+  display: grid;
+  grid-template-columns: repeat(var(--columns, 3), minmax(0, 1fr));
+  gap: var(--grid-gap-desktop, 24px);
+}
+
+/* The optional heading spans the whole grid instead of taking the first cell. */
+.marketing .feature-grid > .container > .section-heading {
+  grid-column: 1 / -1;
+  margin-bottom: 16px;
+}
+
+.marketing .feature {
+  min-width: 0;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--bg);
+  transition: border-color 150ms, box-shadow 150ms, transform 150ms;
+}
+
+.marketing .feature:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+.marketing .feature .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 16px;
+  border-radius: var(--radius-button);
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.marketing .feature h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.marketing .feature p {
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Optional section heading shared by testimonial / logo strip; inherits the band's colour. */
+.marketing .section-heading {
+  margin-bottom: 40px;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+/* Testimonial: one item = a single centred card; 2+ = a CSS-only scroll-snap carousel.
+   Only .testimonial-track scrolls sideways — the page itself never does. */
+.marketing .testimonial-single {
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+.marketing .testimonial-track {
+  --testimonial-gap: var(--grid-gap-desktop, 24px);
+  display: flex;
+  gap: var(--testimonial-gap);
+  min-width: 0;
+  padding-block: 4px 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+
+.marketing .testimonial-track:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.marketing .testimonial {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  min-width: 0;
+  margin: 0;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--bg);
+  box-shadow: var(--shadow-card);
+}
+
+/* Up to 3 cards per row on desktop */
+.marketing .testimonial-track > .testimonial {
+  flex: 0 0 calc((100% - 2 * var(--testimonial-gap)) / 3);
+  scroll-snap-align: start;
+}
+
+.marketing .testimonial-single > .testimonial {
+  text-align: center;
+  align-items: center;
+}
+
+.marketing .testimonial blockquote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.marketing .testimonial-single blockquote {
+  font-size: 24px;
+}
+
+.marketing .testimonial blockquote p {
+  margin: 0;
+}
+
+.marketing .testimonial figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.marketing .testimonial .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.marketing .testimonial .author {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.marketing .testimonial .role::before {
+  content: "· ";
+}
+
+/* Logo strip: centred wrap row, muted greyscale marks, colour on hover/focus. */
+.marketing .logo-strip-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--grid-gap-desktop, 24px) calc(var(--grid-gap-desktop, 24px) * 2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.marketing .logo-strip-item {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  margin: 0;
+}
+
+.marketing .logo-strip-item a {
+  display: inline-flex;
+  align-items: center;
+}
+
+.marketing .logo-strip-item img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: var(--logo-height-desktop, 40px);
+  filter: grayscale(1);
+  opacity: .6;
+  transition: filter 150ms, opacity 150ms;
+}
+
+.marketing .logo-wordmark {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: var(--logo-height-desktop, 40px);
+  color: var(--text-muted);
+  opacity: .8;
+  transition: color 150ms, opacity 150ms;
+}
+
+.marketing .logo-strip-item:hover img,
+.marketing .logo-strip-item a:focus-visible img {
+  filter: none;
+  opacity: 1;
+}
+
+.marketing .logo-strip-item:hover .logo-wordmark,
+.marketing .logo-strip-item a:focus-visible .logo-wordmark {
+  color: var(--text);
+  opacity: 1;
+}
+
+.marketing .logo-strip-item a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: var(--radius-inline-code);
+}
+
+/* Pricing table: same grid + gap as the feature grid; the highlighted plan gets the accent border. */
+.marketing .plans {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--grid-gap-desktop, 24px);
+  align-items: stretch;
+}
+
+.marketing .plan {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 32px 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--bg);
+  box-shadow: var(--shadow-card);
+}
+
+.marketing .plan-highlighted {
+  border: 2px solid var(--accent);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-4px);
+}
+
+.marketing .plan h3 {
+  margin-bottom: 12px;
+  font-size: 20px;
+}
+
+.marketing .plan-price {
+  margin: 0 0 12px;
+}
+
+.marketing .plan-price .price {
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.marketing .plan-price .period {
+  margin-left: 4px;
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+.marketing .plan-description {
+  margin: 0 0 20px;
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.marketing .plan-features {
+  margin: 0 0 28px;
+  padding: 0;
+  list-style: none;
+}
+
+.marketing .plan-features li {
+  position: relative;
+  margin: 0 0 10px;
+  padding-left: 26px;
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* Check marker drawn in CSS: a rotated L-shaped border, no glyph or image. */
+.marketing .plan-features li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0.3em;
+  width: 5px;
+  height: 10px;
+  border: solid var(--accent);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.marketing .plan .cta {
+  margin-top: auto;
+  text-align: center;
+}
+
+/* 3 → 2 columns */
+@media (max-width: 1024px) {
+  .marketing .feature-grid > .container,
+  .marketing .plans {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .marketing .testimonial-track > .testimonial {
+    flex-basis: calc((100% - var(--testimonial-gap)) / 2);
+  }
+}
+
+/* 2 → 1 column; 56px section padding; mobile gutter and gap */
+@media (max-width: 768px) {
+  .marketing .section {
+    padding: var(--marketing-section-padding-mobile, 56px) 0;
+  }
+
+  .marketing .section > .container {
+    width: min(var(--marketing-container-max, 1200px), 100% - 2 * var(--gutter-mobile));
+  }
+
+  .marketing .feature-grid > .container,
+  .marketing .plans {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--grid-gap-mobile, 16px);
+  }
+
+  /* No lift when stacked — it would misalign the single column */
+  .marketing .plan-highlighted {
+    transform: none;
+  }
+
+  .marketing .cta-banner h2 {
+    font-size: 28px;
+  }
+
+  .marketing .section-heading {
+    margin-bottom: 28px;
+    font-size: 26px;
+  }
+
+  /* One card per view; gap collapses 24px → 16px */
+  .marketing .testimonial-track {
+    --testimonial-gap: var(--grid-gap-mobile, 16px);
+  }
+
+  .marketing .testimonial-track > .testimonial {
+    flex-basis: 100%;
+  }
+
+  .marketing .testimonial-single blockquote {
+    font-size: 20px;
+  }
+
+  .marketing .logo-strip-list {
+    gap: var(--grid-gap-mobile, 16px) calc(var(--grid-gap-mobile, 16px) * 2);
+  }
+
+  .marketing .logo-strip-item img {
+    height: var(--logo-height-mobile, 32px);
+  }
+
+  .marketing .logo-wordmark {
+    font-size: 18px;
+    line-height: var(--logo-height-mobile, 32px);
+  }
+}
+
+/* Hero heading scales down to 32px under 640px */
+@media (max-width: 640px) {
+  .marketing .hero h1 {
+    font-size: var(--hero-heading-size-mobile, 32px);
+  }
+
+  .marketing .hero .subheading {
+    font-size: 18px;
+  }
+}
+
+/* Smallest phones: tighter card padding */
+@media (max-width: 375px) {
+  .marketing .feature,
+  .marketing .testimonial,
+  .marketing .plan {
+    padding: 20px;
+  }
+}
+
+/* Scroll reveal (§5.7). reveal.js is the ONLY thing that adds `.reveal-ready` (and it does not
+   when JS is off, IntersectionObserver is missing or the visitor prefers reduced motion), so
+   every hidden starting state below is scoped under it — content never depends on `.is-visible`.
+   A section holding grid children (`.reveal-stagger`, set by reveal.js) fades its children in
+   one after another instead of the section box as a whole; `.reveal-done` hands the cards back
+   their own hover transitions once the reveal has settled. */
+.reveal-ready [data-animate]:not(.reveal-stagger):not(.is-visible),
+.reveal-ready [data-animate].reveal-stagger:not(.is-visible) :is(.container > .feature, .plans > .plan, .testimonial-track > *, .logo-strip-list > li) {
+  opacity: 0;
+  transform: translateY(var(--reveal-distance, 16px));
+}
+
+/* The testimonial track scrolls: lifting its cards would add a transient vertical scrollbar. */
+.reveal-ready [data-animate].reveal-stagger:not(.is-visible) .testimonial-track > * {
+  transform: none;
+}
+
+.reveal-ready [data-animate]:not(.reveal-stagger) {
+  transition: opacity var(--reveal-duration, 500ms) ease-out, transform var(--reveal-duration, 500ms) ease-out;
+}
+
+.reveal-ready [data-animate]:not(.reveal-stagger).is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-ready [data-animate].reveal-stagger:not(.reveal-done) :is(.container > .feature, .plans > .plan, .testimonial-track > *, .logo-strip-list > li) {
+  transition: opacity var(--reveal-duration, 500ms) ease-out calc(var(--i, 0) * var(--reveal-stagger, 60ms)),
+    transform var(--reveal-duration, 500ms) ease-out calc(var(--i, 0) * var(--reveal-stagger, 60ms)),
+    border-color 150ms, box-shadow 150ms;
+}
+
+/* Reduced motion: never hide or move anything, even if `.reveal-ready` is somehow present
+   (e.g. the setting flipped after load). */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-ready [data-animate],
+  .reveal-ready [data-animate] :is(.container > .feature, .plans > .plan, .testimonial-track > *, .logo-strip-list > li) {
+    opacity: 1 !important;
+    transition: none !important;
+  }
+
+  .reveal-ready [data-animate]:not(.is-visible),
+  .reveal-ready [data-animate]:not(.is-visible) :is(.container > .feature, .plans > .plan, .testimonial-track > *, .logo-strip-list > li) {
+    transform: none !important;
+  }
+}

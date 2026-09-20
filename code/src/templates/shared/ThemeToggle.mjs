@@ -1,0 +1,3 @@
+export function renderThemeToggle() {
+  return `<button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle theme">🌓</button>`;
+}

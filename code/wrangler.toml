@@ -1,0 +1,20 @@
+# Binding stub for the docs Feedback function (functions/api/feedback.js) — NOT deployable as-is.
+#
+# Nothing here is a real Cloudflare resource. As of 260919-004 no Pages project and no KV
+# namespace is recorded anywhere in this app (site.config.json carries no Cloudflare block,
+# braincore.ai is still on GitHub Pages). Before the first deploy:
+#   1. create the Pages project + a KV namespace (dashboard, or `wrangler kv namespace create FEEDBACK`);
+#   2. replace <PAGES-PROJECT-NAME> and <FEEDBACK-KV-NAMESPACE-ID> below (or bind FEEDBACK in the
+#      Pages project's Settings -> Functions -> KV namespace bindings, which needs no file at all);
+#   3. deploy with `wrangler pages deploy ../data/asios/dist` FROM THIS DIRECTORY so functions/ is
+#      compiled in. deploy-cloudflare-pages.py (direct-upload API) uploads static files only and
+#      does NOT ship functions/.
+# The test harness (tests/feedback-function.test.mjs) never reads this file.
+
+name = "<PAGES-PROJECT-NAME>"
+pages_build_output_dir = "../data/asios/dist"
+compatibility_date = "2026-09-01"
+
+[[kv_namespaces]]
+binding = "FEEDBACK"
+id = "<FEEDBACK-KV-NAMESPACE-ID>"

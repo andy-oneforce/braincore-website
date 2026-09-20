@@ -1,0 +1,55 @@
+name: Website Build & Deploy
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: code
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: code/package-lock.json
+      - run: npm ci
+      - run: node build.mjs
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: code/package-lock.json
+      - run: npm ci
+        working-directory: code
+      - run: node build.mjs
+        working-directory: code
+      - name: Publish dist/ to gh-pages (orphan commit, force-push — mirrors deploy-github-pages.py --mode branch)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          work_dir=$(mktemp -d)
+          cp -r data/asios/dist/. "$work_dir"/
+          echo "braincore.ai" > "$work_dir/CNAME"
+          cd "$work_dir"
+          git init -q
+          git checkout -q --orphan gh-pages
+          git add -A
+          git commit -q -m "Deploy $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages:gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
