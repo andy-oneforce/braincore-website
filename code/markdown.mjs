@@ -21,6 +21,22 @@ const highlighter = await createHighlighter({
 });
 const LOADED_LANGS = new Set(highlighter.getLoadedLanguages());
 
+// github-light's parameter-token orange (#E36209 on white --code-bg) measures 3.49:1,
+// below AA's 4.5:1 for normal text (axe-core color-contrast, [[260908-015-plan]] R01,
+// docs/guide/style-guide.html). No per-scope override hook exists in Shiki's theme API
+// for a single already-shipped theme, so the token color is remapped post-render; every
+// other github-light/github-dark token color already clears 4.5:1 (checked across all
+// built pages) and is left untouched.
+const SHIKI_LIGHT_CONTRAST_FIXES = { '#E36209': '#C2410C' };
+
+function fixShikiContrast(html) {
+  let out = html;
+  for (const [from, to] of Object.entries(SHIKI_LIGHT_CONTRAST_FIXES)) {
+    out = out.split(`--shiki-light:${from}`).join(`--shiki-light:${to}`);
+  }
+  return out;
+}
+
 const COPY_ICON_SVG =
   '<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false">' +
   '<path fill="currentColor" d="M4 1.5A1.5 1.5 0 0 1 5.5 0h6A1.5 1.5 0 0 1 13 1.5v9A1.5 1.5 0 0 1 11.5 12h-6A1.5 1.5 0 0 1 4 10.5v-9Zm1.5-.5a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-6ZM2 4a.5.5 0 0 1 .5.5V14a.5.5 0 0 0 .5.5h7a.5.5 0 0 1 0 1H3A1.5 1.5 0 0 1 1.5 14V4.5A.5.5 0 0 1 2 4Z"/>' +
@@ -84,7 +100,7 @@ function resolveLang(lang) {
 function highlightFence(token) {
   const { lang, title, highlightLines } = parseFenceInfo(token.info || '');
   const { code, diffAdd, diffRemove } = extractDiffLines(token.content);
-  const html = highlighter.codeToHtml(code, {
+  const html = fixShikiContrast(highlighter.codeToHtml(code, {
     lang: resolveLang(lang),
     themes: SHIKI_THEMES,
     defaultColor: false,
@@ -97,7 +113,7 @@ function highlightFence(token) {
         },
       },
     ],
-  });
+  }));
   const headerText = md.utils.escapeHtml(title || lang || '');
   const plainCode = md.utils.escapeHtml(code);
   return (
@@ -170,10 +186,23 @@ function registerHint(md) {
   });
 }
 
+// Scoped to a single renderMarkdown() call (reset there) — see the currentImageMeta
+// comment below for why this is safe under build.mjs's sequential, single-file-at-a-time
+// rendering. Gives each `:::tabs` group and its panels stable ids so tabs.js can wire
+// `aria-controls`/`aria-labelledby` pairs between buttons and panels.
+let tabGroupCounter = 0;
+let currentTabGroupId = 0;
+let currentTabIndex = 0;
+
 function registerTabs(md) {
   registerContainer(md, {
     name: 'tabs',
-    open: () => '<div class="block-tabs">\n',
+    open: () => {
+      tabGroupCounter += 1;
+      currentTabGroupId = tabGroupCounter;
+      currentTabIndex = 0;
+      return `<div class="block-tabs" id="tabs-${currentTabGroupId}">\n`;
+    },
     close: () => '</div>\n',
   });
   registerContainer(md, {
@@ -182,7 +211,9 @@ function registerTabs(md) {
       const label = attrs.label
         ? ` data-label="${mdInstance.utils.escapeHtml(attrs.label)}"`
         : '';
-      return `<div class="block-tabs__tab"${label}>\n`;
+      const panelId = `tabpanel-${currentTabGroupId}-${currentTabIndex}`;
+      currentTabIndex += 1;
+      return `<div class="block-tabs__tab" id="${panelId}"${label}>\n`;
     },
     close: () => '</div>\n',
   });
@@ -291,5 +322,6 @@ md.renderer.rules.fence = (tokens, idx) => highlightFence(tokens[idx]);
 
 export function renderMarkdown(content, imageMeta = {}) {
   currentImageMeta = imageMeta;
+  tabGroupCounter = 0;
   return md.render(content);
 }

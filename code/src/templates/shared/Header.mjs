@@ -34,5 +34,5 @@ export function renderHeader({ urlPath = '/', showDrawerToggle = false, spaceSwi
   const drawerToggle = showDrawerToggle
     ? '<button type="button" class="drawer-toggle" id="drawer-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">☰</button>'
     : '';
-  return `<header class="site-header">${drawerToggle}<a class="site-logo" href="/">ASIOS</a>${renderSpaceVariant(spaceSwitcher)}<nav class="site-nav"><a href="/">Home</a><a href="/pricing/">Pricing</a><a href="/blog">Blog</a></nav>${renderSearchTrigger()}${renderThemeToggle()}</header>${renderSearchModal()}`;
+  return `<header class="site-header"><a class="skip-link" href="#main-content">Skip to content</a>${drawerToggle}<a class="site-logo" href="/">ASIOS</a>${renderSpaceVariant(spaceSwitcher)}<nav class="site-nav" aria-label="Primary"><a href="/">Home</a><a href="/pricing/">Pricing</a><a href="/about/">About</a><a href="/blog">Blog</a></nav>${renderSearchTrigger()}${renderThemeToggle()}</header>${renderSearchModal()}`;
 }

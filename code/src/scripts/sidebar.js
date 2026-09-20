@@ -49,6 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function setOpen(group, open) {
     group.classList.toggle('open', open);
+    const label = group.querySelector(':scope > .group-label');
+    if (label) label.setAttribute('aria-expanded', String(open));
     saveOpenKeys();
   }
 

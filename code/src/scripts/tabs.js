@@ -23,6 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
       button.type = 'button';
       button.className = 'block-tabs__button';
       button.setAttribute('role', 'tab');
+      const buttonId = panel.id ? `tab-${panel.id.replace(/^tabpanel-/, '')}` : `tab-${i}`;
+      button.id = buttonId;
+      if (panel.id) button.setAttribute('aria-controls', panel.id);
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('aria-labelledby', buttonId);
       button.textContent = label;
       list.appendChild(button);
       return button;
@@ -32,16 +37,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function activate(index) {
       buttons.forEach((button, i) => {
-        button.classList.toggle('is-active', i === index);
-        button.setAttribute('aria-selected', i === index ? 'true' : 'false');
+        const selected = i === index;
+        button.classList.toggle('is-active', selected);
+        button.setAttribute('aria-selected', selected ? 'true' : 'false');
+        button.tabIndex = selected ? 0 : -1;
       });
       panels.forEach((panel, i) => {
-        panel.classList.toggle('is-active', i === index);
+        const selected = i === index;
+        panel.classList.toggle('is-active', selected);
+        panel.hidden = !selected;
       });
     }
 
     buttons.forEach((button, i) => {
       button.addEventListener('click', () => activate(i));
+    });
+
+    list.addEventListener('keydown', (event) => {
+      const currentIndex = buttons.indexOf(document.activeElement);
+      if (currentIndex === -1) return;
+      let nextIndex = null;
+      switch (event.key) {
+        case 'ArrowLeft':
+          nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+          break;
+        case 'ArrowRight':
+          nextIndex = (currentIndex + 1) % buttons.length;
+          break;
+        case 'Home':
+          nextIndex = 0;
+          break;
+        case 'End':
+          nextIndex = buttons.length - 1;
+          break;
+        default:
+          return;
+      }
+      event.preventDefault();
+      activate(nextIndex);
+      buttons[nextIndex].focus();
     });
 
     activate(0);

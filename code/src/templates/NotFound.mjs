@@ -7,6 +7,7 @@
 import { renderHead, renderAnalytics } from '../render/head.mjs';
 import { renderHeader } from './shared/Header.mjs';
 import { renderFooter } from './shared/Footer.mjs';
+import { renderThemeInitScript } from './shared/ThemeToggle.mjs';
 
 export function renderNotFoundPage() {
   const urlPath = '/404.html';
@@ -18,6 +19,7 @@ export function renderNotFoundPage() {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
+${renderThemeInitScript()}
 ${renderHead({ title, description, urlPath, ogType: 'website' })}
 <link rel="stylesheet" href="/styles/tokens.css">
 <link rel="stylesheet" href="/styles/base.css">
@@ -25,12 +27,13 @@ ${renderAnalytics()}
 </head>
 <body class="not-found-page">
 ${renderHeader({ urlPath })}
-<main class="not-found">
+<main id="main-content" class="not-found">
 <h1>Page not found</h1>
 <p class="not-found__body">${description}</p>
 <a class="not-found__home" href="/">Back to home</a>
 </main>
 ${renderFooter()}
+<script defer src="/scripts/theme.js"></script>
 </body>
 </html>
 `;

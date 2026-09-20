@@ -1,5 +1,6 @@
 import { renderHead, renderAnalytics, canonicalUrlFor } from '../../render/head.mjs';
 import { renderHeader } from '../shared/Header.mjs';
+import { renderThemeInitScript } from '../shared/ThemeToggle.mjs';
 import { renderFooter } from '../shared/Footer.mjs';
 import { renderBreadcrumbs } from './Breadcrumbs.mjs';
 import { extractToc } from '../../render/toc.mjs';
@@ -97,6 +98,7 @@ export function renderDocsPage({
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+${renderThemeInitScript()}
 ${renderHead({ title, description, urlPath, ogType: 'website' })}
 ${breadcrumbJsonLd}
 <link rel="stylesheet" href="/styles/tokens.css">
@@ -108,7 +110,7 @@ ${renderAnalytics()}
 ${renderHeader({ urlPath, showDrawerToggle: true, spaceSwitcher })}
 <div class="docs-frame${tocRailHtml ? ' has-toc' : ''}">
 ${sidebarHtml}
-<main class="docs-content" data-pagefind-body data-pagefind-meta="type:Docs">
+<main id="main-content" class="docs-content" data-pagefind-body data-pagefind-meta="type:Docs">
 ${breadcrumbsHtml}<h1 data-pagefind-weight="2" data-pagefind-meta="title">${title}</h1>
 ${pageActionsHtml}${description ? `<p class="page-description">${description}</p>\n` : ''}${tocDropdownHtml ? `${tocDropdownHtml}\n` : ''}${toc.html}
 ${feedbackHtml}${pageNavHtml ? `${pageNavHtml}\n` : ''}${pageMetaHtml}</main>
@@ -121,6 +123,7 @@ ${renderFooter()}
 <script defer src="/scripts/sidebar.js"></script>
 <script defer src="/scripts/drawer.js"></script>
 <script defer src="/scripts/search.js"></script>
+<script defer src="/scripts/theme.js"></script>
 <script defer src="/scripts/toc.js"></script>
 <script defer src="/scripts/page-actions.js"></script>
 <script defer src="/scripts/feedback.js"></script>

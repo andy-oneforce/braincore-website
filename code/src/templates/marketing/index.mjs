@@ -1,6 +1,7 @@
 import { renderHead, renderAnalytics } from '../../render/head.mjs';
 import { renderHeader } from '../shared/Header.mjs';
 import { renderFooter } from '../shared/Footer.mjs';
+import { renderThemeInitScript } from '../shared/ThemeToggle.mjs';
 
 function renderHero(section) {
   const cta = section.cta
@@ -57,7 +58,7 @@ function renderTestimonial(section) {
   const heading = section.heading ? `<h2 class="section-heading">${section.heading}</h2>\n` : '';
   const body =
     items.length > 1
-      ? `<div class="testimonial-track" role="region" aria-label="${section.heading || 'Testimonials'}" tabindex="0">\n${cards}\n</div>`
+      ? `<div class="testimonial-track" role="region" aria-label="${section.heading || 'Testimonials'}" aria-roledescription="carousel" tabindex="0">\n${cards}\n</div>`
       : `<div class="testimonial-single">\n${cards}\n</div>`;
   return `<section class="section testimonial-section"${section.animate ? ' data-animate="true"' : ''}>
 <div class="container">
@@ -139,6 +140,7 @@ export function renderMarketingPage({
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+${renderThemeInitScript()}
 ${renderHead({ title, description, urlPath, ogType: 'website' })}
 <link rel="stylesheet" href="/styles/tokens.css">
 <link rel="stylesheet" href="/styles/base.css">
@@ -147,13 +149,14 @@ ${renderAnalytics()}
 </head>
 <body class="marketing">
 ${renderHeader({ urlPath })}
-<main data-pagefind-body data-pagefind-meta="type:Pages">
+<main id="main-content" data-pagefind-body data-pagefind-meta="type:Pages">
 ${body}
 ${contentHtml}
 </main>
 ${renderFooter()}
 <script defer src="/scripts/reveal.js"></script>
 <script defer src="/scripts/search.js"></script>
+<script defer src="/scripts/theme.js"></script>
 </body>
 </html>
 `;

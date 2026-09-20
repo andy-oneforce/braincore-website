@@ -1,56 +1,49 @@
 ---
 title: Home
+description: "ASIOS is a Platform that installs a per-user Workspace — a layer model for ownership, a conversation runtime for work, one system for people and agents alike."
 sections:
   - type: hero
-    heading: "Ship docs that don't look like docs"
-    subheading: "The ASIOS website — built with our own engine."
-    cta: { label: "Get started", href: "/docs" }
+    heading: "One operating system for how you actually work"
+    subheading: "ASIOS is a Platform that installs a per-user Workspace — a layer model that says who owns what and where it ships, and a conversation runtime that turns every idea into tracked work instead of a dangling thread."
+    cta: { label: "Get started", href: "/docs/user-guide/index.html" }
     animate: true
   - type: featureGrid
-    heading: "Everything a GitBook site has"
+    heading: "Built around how work actually happens"
     animate: true
     items:
-      - icon: "⚡"
-        title: "Instant search"
-        body: "Pagefind indexes every page across docs, blog, and marketing — sub-100ms results, zero infrastructure."
-      - icon: "🎨"
-        title: "On-brand, always"
-        body: "One token set drives docs, marketing, and blog — a single accent colour does most of the work."
-      - icon: "🚀"
-        title: "Static, fast, free"
-        body: "No client router, no framework runtime — every page ships as plain HTML with a few small JS islands."
-  - type: testimonial
-    animate: true
-    items:
-      - quote: "Reads exactly like GitBook — nobody could tell it wasn't."
-        author: "A reviewer"
-        role: "on the first mockup pass"
+      - icon: "🗂️"
+        title: "Ten layers, one authority order"
+        body: "Platform, Brand, Account, Server, System, Support, App, User, Import, Export — each layer declares who may change it and where it ships, so ownership is never redrawn by hand."
+      - icon: "💬"
+        title: "Conversation-first"
+        body: "An idea becomes a conversation and an activity in the same motion, worked in place with its history kept turn by turn — nothing you start is ever left dangling."
+      - icon: "🧩"
+        title: "One runtime, shared primitives"
+        body: "Core-Functions, Apps, hooks and scheduled routines compose into a single system — the same building blocks whether a person or an agent is doing the work."
   - type: pricingTable
-    heading: "Pricing"
+    heading: "Simple, layered pricing"
     animate: true
     plans:
-      - name: "Docs only"
-        price: "$0"
+      - name: "Workspace"
+        price: "Free"
         features:
-          - "Documentation template"
-          - "Search"
-          - "Light/dark theme"
-        cta: { label: "Start here", href: "/docs" }
-      - name: "Full site"
-        price: "$0"
+          - "The full layer model, Platform through Export"
+          - "The conversation runtime — activities, plans, history"
+          - "Your own git-backed vault, no lock-in"
+        cta: { label: "Get started", href: "/docs/user-guide/index.html" }
+      - name: "Team"
+        price: "Talk to us"
         highlighted: true
         features:
-          - "Docs + Marketing + Blog"
-          - "Search across all templates"
-          - "Feedback widget"
-        cta: { label: "Recommended", href: "#get-started" }
-      - name: "+ Ask AI"
-        price: "~$/mo"
+          - "Multiple Workspaces under one Account and Tenant"
+          - "Shared governance without shared data"
+        cta: { label: "See full pricing", href: "/pricing/" }
+      - name: "Platform"
+        price: "Talk to us"
         features:
-          - "Everything above"
-          - "RAG chat over the content"
-          - "Usage-based Claude API cost"
-        cta: { label: "Later", href: "#get-started" }
+          - "White-label brand, topology and onboarding"
+          - "Platform-level installs and updates"
+        cta: { label: "See full pricing", href: "/pricing/" }
   - type: logoStrip
     heading: "Built on"
     animate: true
@@ -60,8 +53,8 @@ sections:
       - name: "Cloudflare Pages"
       - name: "GitHub Pages"
   - type: ctaBanner
-    heading: "Ready to try it?"
+    heading: "Ready to install your Workspace?"
     id: "get-started"
-    cta: { label: "Read the docs", href: "/docs" }
+    cta: { label: "Read the docs", href: "/docs/user-guide/index.html" }
     animate: true
 ---

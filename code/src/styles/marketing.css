@@ -66,7 +66,8 @@ body.marketing {
   max-width: 620px;
   margin: 0 auto 32px;
   font-size: 20px;
-  color: rgba(255, 255, 255, .85);
+  font-weight: 700;
+  color: #fff;
 }
 
 .marketing .cta-banner h2 {
@@ -75,12 +76,15 @@ body.marketing {
   margin-bottom: 24px;
 }
 
-/* CTA button: white-on-accent inside the accent sections, accent-on-white elsewhere. */
+/* CTA button: white-on-accent inside the accent sections, accent-on-white elsewhere.
+   --accent-on-light (not --accent) for the background — white text on raw --accent falls to
+   3.87:1 in dark theme; --accent-on-light is the darkened dark-theme variant that clears 4.5:1
+   (axe-core color-contrast, [[260908-015-plan]] R01, pricing plan cards). */
 .marketing .cta {
   display: inline-block;
   padding: 12px 24px;
   border-radius: var(--radius-button);
-  background: var(--accent);
+  background: var(--accent-on-light);
   color: #fff;
   font-weight: 600;
   transition: box-shadow 150ms, transform 150ms;
@@ -95,7 +99,7 @@ body.marketing {
 .marketing .hero .cta,
 .marketing .cta-banner .cta {
   background: #fff;
-  color: var(--accent);
+  color: var(--accent-on-light);
 }
 
 /* Feature grid: --columns comes from the section's inline style and inherits into the container. */
@@ -472,7 +476,10 @@ body.marketing {
   }
 
   .marketing .hero .subheading {
-    font-size: 18px;
+    /* Must stay >= 18.66px (14pt) — the WCAG large-text-bold threshold this white-on-accent
+       pairing depends on for its 3:1 (not 4.5:1) AA minimum; 18px measured 3.87:1 in dark
+       theme and failed (axe-core color-contrast, [[260908-015-plan]] R01, 606px viewport). */
+    font-size: 19px;
   }
 }
 

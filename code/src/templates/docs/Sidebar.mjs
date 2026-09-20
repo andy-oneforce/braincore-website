@@ -18,8 +18,10 @@ function containsCurrentPage(entry, currentPage) {
 
 function renderLink(entry, ctx) {
   const { currentPage, titleFor, hrefFor } = ctx;
-  const activeClass = entry.page === currentPage ? ' class="active"' : '';
-  return `<a href="${hrefFor(entry.page)}"${activeClass}>${titleFor(entry.page)}</a>`;
+  const isCurrent = entry.page === currentPage;
+  const activeClass = isCurrent ? ' class="active"' : '';
+  const ariaCurrent = isCurrent ? ' aria-current="page"' : '';
+  return `<a href="${hrefFor(entry.page)}" role="treeitem"${activeClass}${ariaCurrent}>${titleFor(entry.page)}</a>`;
 }
 
 // Renders one nav entry at any depth: a `.group` (label + nested `<ul>`) when it carries
@@ -28,11 +30,12 @@ function renderEntry(entry, ctx) {
   if (!Array.isArray(entry.items) || entry.items.length === 0) {
     return renderLink(entry, ctx);
   }
-  const openClass = containsCurrentPage(entry, ctx.currentPage) ? ' open' : '';
+  const isOpen = containsCurrentPage(entry, ctx.currentPage);
+  const openClass = isOpen ? ' open' : '';
   const items = entry.items
-    .map((child) => `<li>${renderEntry(child, ctx)}</li>`)
+    .map((child) => `<li role="presentation">${renderEntry(child, ctx)}</li>`)
     .join('');
-  return `<div class="group${openClass}"><div class="group-label" tabindex="0"><span class="chevron">▸</span> ${ctx.titleFor(entry.page)}</div><ul>${items}</ul></div>`;
+  return `<div class="group${openClass}" role="group"><div class="group-label" tabindex="0" role="treeitem" aria-expanded="${isOpen}"><span class="chevron">▸</span> ${ctx.titleFor(entry.page)}</div><ul role="presentation">${items}</ul></div>`;
 }
 
 // Renders a full `<aside class="sidebar">…</aside>` for one docs space.
@@ -45,5 +48,5 @@ function renderEntry(entry, ctx) {
 export function renderSidebar({ tree = [], currentPage = '', titleFor, hrefFor } = {}) {
   const ctx = { currentPage, titleFor, hrefFor };
   const body = tree.map((entry) => renderEntry(entry, ctx)).join('');
-  return `<aside class="sidebar" id="sidebar">${body}</aside>`;
+  return `<aside class="sidebar" id="sidebar"><nav aria-label="Docs navigation"><div role="tree">${body}</div></nav></aside>`;
 }

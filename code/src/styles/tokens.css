@@ -34,6 +34,13 @@
   --border: #e5e7eb;
   --accent: #346ddb;
   --accent-bg: rgba(52, 109, 219, .08);
+  /* Darker than --accent: text set in --accent must hit 4.5:1 against both --bg and --accent-bg
+     (axe-core color-contrast, [[260908-015-plan]] R01). --accent itself stays for backgrounds/borders. */
+  --accent-text: #3065cb;
+  /* --accent as button/link text on a solid white surface (e.g. the hero CTA), OR as a solid
+     background under white text (e.g. .skip-link) — contrast is symmetric so one value covers
+     both directions. Already clears 4.5:1 in light theme; only dark needs a darkened variant. */
+  --accent-on-light: var(--accent);
   --code-bg: #f6f8fa;
   --hint-info: #3b82f6;
   --hint-success: #22c55e;
@@ -77,6 +84,8 @@
   --border: #2e2e36;
   --accent: #4d7fe0;
   --accent-bg: rgba(77, 127, 224, .14);
+  --accent-text: #6a94e5;
+  --accent-on-light: #4572ca;
   --code-bg: #0f0f12;
   --hint-info: #3b82f6;
   --hint-success: #22c55e;

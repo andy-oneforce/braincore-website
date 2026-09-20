@@ -284,7 +284,7 @@
 }
 
 .block-tabs__button.is-active {
-  color: var(--accent);
+  color: var(--accent-text);
   border-bottom-color: var(--accent);
 }
 

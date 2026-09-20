@@ -1,0 +1,11 @@
+title: User Guide
+nav:
+  - page: index.md
+  - page: getting-started/index.md
+    items:
+      - page: getting-started/installation.md
+      - page: getting-started/first-steps.md
+  - page: concepts/layers.md
+    items:
+      - page: concepts/activities.md
+  - page: style-guide.md

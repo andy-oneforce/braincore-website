@@ -57,12 +57,37 @@ h3 {
 }
 
 a {
-  color: var(--accent);
+  color: var(--accent-text);
   text-decoration: none;
 }
 
 a:hover {
   text-decoration: underline;
+}
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 8px;
+  z-index: 100;
+  padding: 8px 16px;
+  border-radius: var(--radius-button);
+  background: var(--accent-on-light);
+  color: #fff;
+  box-shadow: var(--shadow-card-hover);
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: 8px;
 }
 
 table {
@@ -129,7 +154,7 @@ kbd {
 
 sup.footnote-ref {
   font-size: 0.75em;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 section.footnotes {
@@ -144,7 +169,8 @@ section.footnotes {
 }
 
 .footnote-backref {
-  color: var(--accent);
+  color: var(--accent-text);
+  text-decoration: underline;
 }
 
 .card {
@@ -396,8 +422,9 @@ section.footnotes {
   background: transparent;
 }
 
-.search-input:focus {
-  outline: none;
+.search-input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .search-recent,
@@ -537,7 +564,7 @@ section.footnotes {
 
 .sidebar a.active {
   background: var(--accent-bg);
-  color: var(--accent);
+  color: var(--accent-text);
   font-weight: 600;
   position: relative;
 }
@@ -624,7 +651,7 @@ section.footnotes {
 
 .page-nav-title {
   font-weight: 600;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 /* Page footer under the pager (LastUpdated.mjs + EditLink.mjs): "Last updated <date>" and an
@@ -852,6 +879,16 @@ section.footnotes {
     align-items: center;
   }
 
+  /* Marketing/blog top nav (Home/Pricing/About/Blog) has no drawer of its own at this width —
+     hide it rather than wrap, and drop the ⌘K hint so the search trigger shrinks to icon-only. */
+  .site-header .site-nav {
+    display: none;
+  }
+
+  .search-trigger-hint {
+    display: none;
+  }
+
   /* Keep the space label from colliding with the drawer toggle: it shrinks and ellipsizes, and
      the header's top-level nav links yield to it. */
   .site-header .space-title,
@@ -960,7 +997,7 @@ section.footnotes {
 .toc .active,
 .toc-dropdown .active {
   background: var(--accent-bg);
-  color: var(--accent);
+  color: var(--accent-text);
   box-shadow: inset 2px 0 0 var(--accent);
 }
 
