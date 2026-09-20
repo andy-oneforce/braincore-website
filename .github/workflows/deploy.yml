@@ -40,13 +40,13 @@ jobs:
         working-directory: code
       - name: Publish dist/ to gh-pages (orphan commit, force-push — mirrors deploy-github-pages.py --mode branch)
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
           work_dir=$(mktemp -d)
           cp -r data/asios/dist/. "$work_dir"/
           echo "braincore.ai" > "$work_dir/CNAME"
           cd "$work_dir"
           git init -q
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -q --orphan gh-pages
           git add -A
           git commit -q -m "Deploy $(date -u +'%Y-%m-%d %H:%M UTC')"
