@@ -1,12 +1,12 @@
 {
   "site_name": "ASIOS",
   "base_url": "https://braincore.ai",
-  "default_description": "ASI OS — the operating system for autonomous AI-run organizations.",
+  "default_description": "ASI OS \u2014 the operating system for autonomous AI-run organizations.",
   "default_og_image": "/og/home.png",
   "twitter_handle": "",
   "page_size": 10,
   "edit_link": {
-    "repo_url": "https://github.com/andy-oneforce/asios-platform-dev",
+    "repo_url": "https://github.com/andy-oneforce/braincore-website",
     "branch": "main"
   },
   "analytics": {
