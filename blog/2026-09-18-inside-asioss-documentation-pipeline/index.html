@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(){try{var p=localStorage.getItem('asios-theme')||'system';var dark=p==='dark'||(p==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches);if(dark)document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<title>Inside ASIOS's documentation pipeline | ASIOS</title>
+<meta name="description" content="How markdown source becomes a docs page, sidebar entry, and table of contents.">
+<link rel="canonical" href="https://braincore.ai/blog/2026-09-18-inside-asioss-documentation-pipeline/">
+<meta property="og:title" content="Inside ASIOS's documentation pipeline">
+<meta property="og:description" content="How markdown source becomes a docs page, sidebar entry, and table of contents.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://braincore.ai/blog/2026-09-18-inside-asioss-documentation-pipeline/">
+<meta property="og:image" content="https://braincore.ai/og/blog-2026-09-18-inside-asioss-documentation-pipeline.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Inside ASIOS's documentation pipeline">
+<meta name="twitter:description" content="How markdown source becomes a docs page, sidebar entry, and table of contents.">
+<meta name="twitter:image" content="https://braincore.ai/og/blog-2026-09-18-inside-asioss-documentation-pipeline.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Inside ASIOS's documentation pipeline","datePublished":"2026-09-18","author":{"@type":"Person","name":"Andy Zhulenev"}}</script>
+<link rel="stylesheet" href="/styles/tokens.css">
+<link rel="stylesheet" href="/styles/base.css">
+
+</head>
+<body class="blog-post">
+<header class="site-header"><a class="skip-link" href="#main-content">Skip to content</a><a class="site-logo" href="/">ASIOS</a><nav class="site-nav" aria-label="Primary"><a href="/">Home</a><a href="/pricing/">Pricing</a><a href="/about/">About</a><a href="/blog">Blog</a></nav><button type="button" class="search-trigger" data-search-trigger aria-haspopup="dialog" aria-controls="search-modal" aria-expanded="false" aria-label="Search">🔍<span class="search-trigger-hint">⌘K</span></button><button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle theme">🌓</button></header><div class="search-backdrop" id="search-backdrop" hidden></div>
+<div class="search-modal" id="search-modal" role="dialog" aria-modal="true" aria-label="Search" hidden>
+<div class="search-modal-inner">
+<input type="text" class="search-input" id="search-input" placeholder="Search docs, blog, and pages..." autocomplete="off" spellcheck="false" aria-label="Search">
+<div class="search-recent" id="search-recent" data-search-recent hidden></div>
+<div class="search-results" id="search-results" data-search-results role="listbox" aria-label="Search results"></div>
+</div>
+</div>
+<div class="blog-frame has-toc">
+<main id="main-content" data-pagefind-body data-pagefind-meta="type:Blog">
+<article>
+<h1 data-pagefind-weight="2" data-pagefind-meta="title">Inside ASIOS's documentation pipeline</h1>
+<p class="byline">Andy Zhulenev · 2026-09-18</p>
+<ul class="tags"><li>Engineering</li><li>Documentation</li></ul>
+<details class="toc-dropdown"><summary>On this page</summary><ol><li><a href="#from-markdown-to-page" data-level="2">From markdown to page</a></li><li><a href="#headings-become-navigation" data-level="2">Headings become navigation</a></li></ol></details>
+<p>Every page in the docs section starts as a single markdown file with frontmatter, and ends as static HTML with a sidebar entry and a table of contents already wired up. Here's what happens in between.</p>
+<h2 id="from-markdown-to-page">From markdown to page</h2>
+<p><code>build.mjs</code> walks the docs source tree, reads each file's frontmatter for title, description, and ordering, and renders the body through the same markdown pipeline the blog uses. The rendered HTML is then handed to the docs template, which adds the sidebar, breadcrumbs, and page chrome.</p>
+<h2 id="headings-become-navigation">Headings become navigation</h2>
+<p>The table of contents isn't hand-authored — it's extracted from the already-rendered page HTML. Every <code>&lt;h2&gt;</code> and <code>&lt;h3&gt;</code> that doesn't already carry an id gets one generated from its text, and those headings become the nested &quot;On this page&quot; list. The same extraction step now runs on blog posts too, so a long post gets the same on-page navigation a docs page does.</p>
+<p>Keeping the sidebar, breadcrumbs, and table of contents all derived from the source files — rather than maintained by hand alongside them — is what keeps the docs section from drifting out of sync with itself as it grows.</p>
+
+</article>
+<aside class="related-posts"><h2>Related posts</h2><ul><li><a href="/blog/2026-09-15-why-we-hand-rolled-the-build-script/">Why we hand-rolled the build script</a></li></ul></aside></main>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ol><li><a href="#from-markdown-to-page" data-level="2">From markdown to page</a></li><li><a href="#headings-become-navigation" data-level="2">Headings become navigation</a></li></ol></nav>
+</div>
+<footer class="site-footer"><p>&copy; 2026 ASIOS. All rights reserved.</p></footer>
+<script defer src="/scripts/search.js"></script>
+<script defer src="/scripts/theme.js"></script>
+<script defer src="/scripts/toc.js"></script>
+</body>
+</html>

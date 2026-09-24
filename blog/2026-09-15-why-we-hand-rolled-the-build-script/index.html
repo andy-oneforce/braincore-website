@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(){try{var p=localStorage.getItem('asios-theme')||'system';var dark=p==='dark'||(p==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches);if(dark)document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<title>Why we hand-rolled the build script | ASIOS</title>
+<meta name="description" content="The original plan reached for Astro. Here's the one reported bug that changed it.">
+<link rel="canonical" href="https://braincore.ai/blog/2026-09-15-why-we-hand-rolled-the-build-script/">
+<meta property="og:title" content="Why we hand-rolled the build script">
+<meta property="og:description" content="The original plan reached for Astro. Here's the one reported bug that changed it.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://braincore.ai/blog/2026-09-15-why-we-hand-rolled-the-build-script/">
+<meta property="og:image" content="https://braincore.ai/og/blog-2026-09-15-why-we-hand-rolled-the-build-script.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Why we hand-rolled the build script">
+<meta name="twitter:description" content="The original plan reached for Astro. Here's the one reported bug that changed it.">
+<meta name="twitter:image" content="https://braincore.ai/og/blog-2026-09-15-why-we-hand-rolled-the-build-script.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Why we hand-rolled the build script","datePublished":"2026-09-15","author":{"@type":"Person","name":"Andy Zhulenev"}}</script>
+<link rel="stylesheet" href="/styles/tokens.css">
+<link rel="stylesheet" href="/styles/base.css">
+
+</head>
+<body class="blog-post">
+<header class="site-header"><a class="skip-link" href="#main-content">Skip to content</a><a class="site-logo" href="/">ASIOS</a><nav class="site-nav" aria-label="Primary"><a href="/">Home</a><a href="/pricing/">Pricing</a><a href="/about/">About</a><a href="/blog">Blog</a></nav><button type="button" class="search-trigger" data-search-trigger aria-haspopup="dialog" aria-controls="search-modal" aria-expanded="false" aria-label="Search">🔍<span class="search-trigger-hint">⌘K</span></button><button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle theme">🌓</button></header><div class="search-backdrop" id="search-backdrop" hidden></div>
+<div class="search-modal" id="search-modal" role="dialog" aria-modal="true" aria-label="Search" hidden>
+<div class="search-modal-inner">
+<input type="text" class="search-input" id="search-input" placeholder="Search docs, blog, and pages..." autocomplete="off" spellcheck="false" aria-label="Search">
+<div class="search-recent" id="search-recent" data-search-recent hidden></div>
+<div class="search-results" id="search-results" data-search-results role="listbox" aria-label="Search results"></div>
+</div>
+</div>
+<div class="blog-frame has-toc">
+<main id="main-content" data-pagefind-body data-pagefind-meta="type:Blog">
+<article>
+<h1 data-pagefind-weight="2" data-pagefind-meta="title">Why we hand-rolled the build script</h1>
+<p class="byline">Andy Zhulenev · 2026-09-15</p>
+<ul class="tags"><li>Engineering</li><li>Architecture</li></ul>
+<details class="toc-dropdown"><summary>On this page</summary><ol><li><a href="#the-sidebar-flicker-report" data-level="2">The sidebar-flicker report</a></li><li><a href="#the-fix-that-isn-t-framework-specific" data-level="2">The fix that isn't framework-specific</a></li></ol></details>
+<p>The original plan reached for Astro. It's a good default for a docs site — content collections, an island model, zero-JS-by-default pages. The reason we didn't ship it comes down to one reported bug.</p>
+<h2 id="the-sidebar-flicker-report">The sidebar-flicker report</h2>
+<p>Cloudflare's own developer docs run on Astro + Starlight, and hit a filed, reproduced defect: the sidebar drops and the TOC highlight lags by a frame on every navigation, specifically on Cloudflare Pages + Chrome. It shipped as <code>&lt;ClientRouter /&gt;</code>-driven view transitions — fast, but with a failure mode nobody could fully explain.</p>
+<p>We didn't want to inherit a bug we couldn't debug ourselves. A framework's client router is opaque by design; when it misbehaves, you're waiting on someone else's fix.</p>
+<h2 id="the-fix-that-isn-t-framework-specific">The fix that isn't framework-specific</h2>
+<p>Full static navigation — every link a real page load, no client router — sidesteps the whole class of bug. That's what a hand-rolled build does by default, since there's no router to misconfigure in the first place.</p>
+<p>The tradeoff is real: no island hydration, no client-side transitions, no framework ecosystem to lean on. What we get back is a build we can read start to finish, and a navigation model with exactly one failure mode — a broken link — instead of an open-ended one.</p>
+<p>That trade is the whole thesis behind <code>build.mjs</code>: markdown in, static HTML out, nothing in between that we didn't write ourselves.</p>
+
+</article>
+<aside class="related-posts"><h2>Related posts</h2><ul><li><a href="/blog/2026-09-18-inside-asioss-documentation-pipeline/">Inside ASIOS's documentation pipeline</a></li></ul></aside></main>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ol><li><a href="#the-sidebar-flicker-report" data-level="2">The sidebar-flicker report</a></li><li><a href="#the-fix-that-isn-t-framework-specific" data-level="2">The fix that isn't framework-specific</a></li></ol></nav>
+</div>
+<footer class="site-footer"><p>&copy; 2026 ASIOS. All rights reserved.</p></footer>
+<script defer src="/scripts/search.js"></script>
+<script defer src="/scripts/theme.js"></script>
+<script defer src="/scripts/toc.js"></script>
+</body>
+</html>

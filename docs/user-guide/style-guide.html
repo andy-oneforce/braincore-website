@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(){try{var p=localStorage.getItem('asios-theme')||'system';var dark=p==='dark'||(p==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches);if(dark)document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<title>Style Guide | ASIOS</title>
+<meta name="description" content="A reference page showing every content-block directive available to a docs author — hints, code, tabs, expandable sections, a stepper, cards, and tables.">
+<link rel="canonical" href="https://braincore.ai/docs/user-guide/style-guide.html">
+<meta property="og:title" content="Style Guide">
+<meta property="og:description" content="A reference page showing every content-block directive available to a docs author — hints, code, tabs, expandable sections, a stepper, cards, and tables.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://braincore.ai/docs/user-guide/style-guide.html">
+<meta property="og:image" content="https://braincore.ai/og/docs-user-guide-style-guide.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Style Guide">
+<meta name="twitter:description" content="A reference page showing every content-block directive available to a docs author — hints, code, tabs, expandable sections, a stepper, cards, and tables.">
+<meta name="twitter:image" content="https://braincore.ai/og/docs-user-guide-style-guide.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"User Guide","item":"https://braincore.ai/docs/user-guide/"},{"@type":"ListItem","position":2,"name":"Style Guide","item":"https://braincore.ai/docs/user-guide/style-guide.html"}]}</script>
+<link rel="stylesheet" href="/styles/tokens.css">
+<link rel="stylesheet" href="/styles/base.css">
+<link rel="stylesheet" href="/styles/blocks.css">
+
+</head>
+<body class="docs">
+<header class="site-header"><a class="skip-link" href="#main-content">Skip to content</a><button type="button" class="drawer-toggle" id="drawer-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">☰</button><a class="site-logo" href="/">ASIOS</a><span class="space-title">User Guide</span><nav class="site-nav" aria-label="Primary"><a href="/">Home</a><a href="/pricing/">Pricing</a><a href="/about/">About</a><a href="/blog">Blog</a></nav><button type="button" class="search-trigger" data-search-trigger aria-haspopup="dialog" aria-controls="search-modal" aria-expanded="false" aria-label="Search">🔍<span class="search-trigger-hint">⌘K</span></button><button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle theme">🌓</button></header><div class="search-backdrop" id="search-backdrop" hidden></div>
+<div class="search-modal" id="search-modal" role="dialog" aria-modal="true" aria-label="Search" hidden>
+<div class="search-modal-inner">
+<input type="text" class="search-input" id="search-input" placeholder="Search docs, blog, and pages..." autocomplete="off" spellcheck="false" aria-label="Search">
+<div class="search-recent" id="search-recent" data-search-recent hidden></div>
+<div class="search-results" id="search-results" data-search-results role="listbox" aria-label="Search results"></div>
+</div>
+</div>
+<div class="docs-frame has-toc">
+<aside class="sidebar" id="sidebar"><nav aria-label="Docs navigation"><div role="tree"><a href="/docs/user-guide/index.html" role="treeitem">Welcome</a><div class="group" role="group"><div class="group-label" tabindex="0" role="treeitem" aria-expanded="false"><span class="chevron">▸</span> Getting started</div><ul role="presentation"><li role="presentation"><a href="/docs/user-guide/getting-started/installation.html" role="treeitem">Installation</a></li><li role="presentation"><a href="/docs/user-guide/getting-started/first-steps.html" role="treeitem">First steps</a></li></ul></div><div class="group" role="group"><div class="group-label" tabindex="0" role="treeitem" aria-expanded="false"><span class="chevron">▸</span> Layers</div><ul role="presentation"><li role="presentation"><a href="/docs/user-guide/concepts/activities.html" role="treeitem">Activities</a></li></ul></div><a href="/docs/user-guide/style-guide.html" role="treeitem" class="active" aria-current="page">Style Guide</a></div></nav></aside>
+<main id="main-content" class="docs-content" data-pagefind-body data-pagefind-meta="type:Docs">
+<nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/docs/user-guide/index.html">User Guide</a></li><li><span aria-current="page">Style Guide</span></li></ol></nav>
+<h1 data-pagefind-weight="2" data-pagefind-meta="title">Style Guide</h1>
+<div class="page-actions" role="group" aria-label="Page actions">
+<button type="button" class="page-actions__btn" data-page-actions-copy data-md-src="/docs/user-guide/style-guide.md" aria-label="Copy as Markdown" hidden>Copy as Markdown</button>
+<a class="page-actions__btn" href="https://claude.ai/new?q=Read%20https%3A%2F%2Fbraincore.ai%2Fdocs%2Fuser-guide%2Fstyle-guide.html%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="noopener noreferrer">Open in Claude</a>
+<a class="page-actions__btn" href="https://chatgpt.com/?q=Read%20https%3A%2F%2Fbraincore.ai%2Fdocs%2Fuser-guide%2Fstyle-guide.html%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="noopener noreferrer">Open in ChatGPT</a>
+<span class="page-actions__status" role="status" aria-live="polite"></span>
+</div>
+<p class="page-description">A reference page showing every content-block directive available to a docs author — hints, code, tabs, expandable sections, a stepper, cards, and tables.</p>
+<details class="toc-dropdown"><summary>On this page</summary><ol><li><a href="#hints" data-level="2">Hints</a></li><li><a href="#code" data-level="2">Code</a></li><li><a href="#tabs" data-level="2">Tabs</a></li><li><a href="#expandable" data-level="2">Expandable</a></li><li><a href="#stepper" data-level="2">Stepper</a></li><li><a href="#cards" data-level="2">Cards</a></li><li><a href="#tables" data-level="2">Tables</a></li></ol></details>
+<p>This page is a living reference, not reader-facing narrative — it exists so a docs author can see
+every supported content block rendered in place before using it in a real page.</p>
+<h2 id="hints">Hints</h2>
+<div class="block-hint block-hint--info">
+<p>This is an <strong>info</strong> hint — general context that's useful but not critical.</p>
+</div>
+<div class="block-hint block-hint--success">
+<p>This is a <strong>success</strong> hint — confirms something worked as expected.</p>
+</div>
+<div class="block-hint block-hint--warning">
+<p>This is a <strong>warning</strong> hint — flags something the reader should double-check.</p>
+</div>
+<div class="block-hint block-hint--danger">
+<p>This is a <strong>danger</strong> hint — calls out something that can break or lose work.</p>
+</div>
+<h2 id="code">Code</h2>
+<div class="block-code">
+<div class="block-code__header"><span class="block-code__lang">js</span><button type="button" class="block-code__copy" data-code="function greet(name) {
+  return `Hello, ${name}!`;
+}" aria-label="Copy code"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4 1.5A1.5 1.5 0 0 1 5.5 0h6A1.5 1.5 0 0 1 13 1.5v9A1.5 1.5 0 0 1 11.5 12h-6A1.5 1.5 0 0 1 4 10.5v-9Zm1.5-.5a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-6ZM2 4a.5.5 0 0 1 .5.5V14a.5.5 0 0 0 .5.5h7a.5.5 0 0 1 0 1H3A1.5 1.5 0 0 1 1.5 14V4.5A.5.5 0 0 1 2 4Z"/></svg></button></div>
+<pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">function</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> greet</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#C2410C;--shiki-dark:#FFAB70">name</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) {</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">  return</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> `Hello, ${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">name</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">}!`</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">;</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
+</div>
+<h2 id="tabs">Tabs</h2>
+<div class="block-tabs" id="tabs-1">
+<div class="block-tabs__tab" id="tabpanel-1-0" data-label="npm">
+<div class="block-code">
+<div class="block-code__header"><span class="block-code__lang">bash</span><button type="button" class="block-code__copy" data-code="npm install asios" aria-label="Copy code"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4 1.5A1.5 1.5 0 0 1 5.5 0h6A1.5 1.5 0 0 1 13 1.5v9A1.5 1.5 0 0 1 11.5 12h-6A1.5 1.5 0 0 1 4 10.5v-9Zm1.5-.5a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-6ZM2 4a.5.5 0 0 1 .5.5V14a.5.5 0 0 0 .5.5h7a.5.5 0 0 1 0 1H3A1.5 1.5 0 0 1 1.5 14V4.5A.5.5 0 0 1 2 4Z"/></svg></button></div>
+<pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">npm</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> install</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> asios</span></span></code></pre>
+</div>
+</div>
+<div class="block-tabs__tab" id="tabpanel-1-1" data-label="pnpm">
+<div class="block-code">
+<div class="block-code__header"><span class="block-code__lang">bash</span><button type="button" class="block-code__copy" data-code="pnpm add asios" aria-label="Copy code"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4 1.5A1.5 1.5 0 0 1 5.5 0h6A1.5 1.5 0 0 1 13 1.5v9A1.5 1.5 0 0 1 11.5 12h-6A1.5 1.5 0 0 1 4 10.5v-9Zm1.5-.5a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-6ZM2 4a.5.5 0 0 1 .5.5V14a.5.5 0 0 0 .5.5h7a.5.5 0 0 1 0 1H3A1.5 1.5 0 0 1 1.5 14V4.5A.5.5 0 0 1 2 4Z"/></svg></button></div>
+<pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">pnpm</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> add</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF"> asios</span></span></code></pre>
+</div>
+</div>
+</div>
+<h2 id="expandable">Expandable</h2>
+<details class="block-expandable">
+<summary class="block-expandable__summary">What does this do?</summary>
+<div class="block-expandable__content">
+<p>This content is hidden until the reader expands the section.</p>
+</div>
+</details>
+<h2 id="stepper">Stepper</h2>
+<div class="block-stepper">
+<div class="block-stepper__step">
+<div class="block-stepper__step-title">Install</div>
+<div class="block-stepper__step-content">
+<p>Install the Workspace onto your machine.</p>
+</div>
+</div>
+<div class="block-stepper__step">
+<div class="block-stepper__step-title">Configure</div>
+<div class="block-stepper__step-content">
+<p>Point it at your account.</p>
+</div>
+</div>
+<div class="block-stepper__step">
+<div class="block-stepper__step-title">Go</div>
+<div class="block-stepper__step-content">
+<p>Start your first activity.</p>
+</div>
+</div>
+</div>
+<h2 id="cards">Cards</h2>
+<div class="block-cards">
+<div class="block-cards__card">
+<div class="block-cards__card-title">Getting started</div>
+<div class="block-cards__card-content">
+<p>Install your Workspace and take your first actions in it.</p>
+</div>
+</div>
+<div class="block-cards__card">
+<div class="block-cards__card-title">Concepts</div>
+<div class="block-cards__card-content">
+<p>The two ideas worth understanding early — layers and activities.</p>
+</div>
+</div>
+</div>
+<h2 id="tables">Tables</h2>
+<table>
+<thead>
+<tr>
+<th>Directive</th>
+<th>Renders as</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hint</code></td>
+<td><code>&lt;div class=&quot;block-hint&quot;&gt;</code></td>
+</tr>
+<tr>
+<td><code>tabs</code> / <code>tab</code></td>
+<td><code>&lt;div class=&quot;block-tabs&quot;&gt;</code></td>
+</tr>
+<tr>
+<td><code>expandable</code></td>
+<td><code>&lt;details class=&quot;block-expandable&quot;&gt;</code></td>
+</tr>
+<tr>
+<td><code>stepper</code> / <code>step</code></td>
+<td><code>&lt;div class=&quot;block-stepper&quot;&gt;</code></td>
+</tr>
+<tr>
+<td><code>cards</code> / <code>card</code></td>
+<td><code>&lt;div class=&quot;block-cards&quot;&gt;</code></td>
+</tr>
+</tbody>
+</table>
+
+<form class="feedback" method="post" action="/api/feedback" data-feedback data-route="/docs/user-guide/style-guide.html">
+<input type="hidden" name="route" value="/docs/user-guide/style-guide.html">
+<span class="feedback__question" id="feedback-question">Was this page helpful?</span>
+<div class="feedback__actions" role="group" aria-labelledby="feedback-question">
+<button type="submit" class="feedback__btn" name="vote" value="yes">Yes</button>
+<button type="submit" class="feedback__btn" name="vote" value="no">No</button>
+</div>
+<span class="feedback__status" role="status" aria-live="polite"></span>
+</form>
+<nav class="page-nav" aria-label="Pager"><a class="page-nav-prev" rel="prev" href="/docs/user-guide/concepts/activities.html"><span class="page-nav-label">Previous</span><span class="page-nav-title">Activities</span></a></nav>
+<footer class="page-meta"><p class="last-updated">Last updated <time datetime="2026-09-19T23:40:25-07:00">September 19, 2026</time></p><p class="edit-link"><a href="https://github.com/andy-oneforce/braincore-website/blob/main/data/asios/content/docs/user-guide/style-guide.md" rel="noopener">Edit this page</a></p></footer>
+</main>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ol><li><a href="#hints" data-level="2">Hints</a></li><li><a href="#code" data-level="2">Code</a></li><li><a href="#tabs" data-level="2">Tabs</a></li><li><a href="#expandable" data-level="2">Expandable</a></li><li><a href="#stepper" data-level="2">Stepper</a></li><li><a href="#cards" data-level="2">Cards</a></li><li><a href="#tables" data-level="2">Tables</a></li></ol></nav>
+</div>
+<div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+<footer class="site-footer"><p>&copy; 2026 ASIOS. All rights reserved.</p></footer>
+<script defer src="/scripts/tabs.js"></script>
+<script defer src="/scripts/copy.js"></script>
+<script defer src="/scripts/figure-zoom.js"></script>
+<script defer src="/scripts/sidebar.js"></script>
+<script defer src="/scripts/drawer.js"></script>
+<script defer src="/scripts/search.js"></script>
+<script defer src="/scripts/theme.js"></script>
+<script defer src="/scripts/toc.js"></script>
+<script defer src="/scripts/page-actions.js"></script>
+<script defer src="/scripts/feedback.js"></script>
+</body>
+</html>

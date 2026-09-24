@@ -1,0 +1,444 @@
+/**
+ * ASIOS Website — Content Block Styles
+ * Styles the 6 block wrapper classes markdown.mjs's directive transforms emit:
+ * block-hint, block-expandable, block-stepper, block-cards, block-figure,
+ * block-tabs. Per 260907-009-gitbook-website-build-recommendation.md §5.3-5.4.
+ * Assumes tokens.css is loaded first — no new custom properties are added here.
+ */
+
+/* ---- block-hint ---- */
+
+.block-hint {
+  border-left: 4px solid;
+  border-radius: var(--radius-card);
+  padding: 12px 16px;
+  margin: 16px 0;
+}
+
+.block-hint p {
+  font-weight: 400;
+}
+
+.block-hint strong {
+  font-weight: 600;
+}
+
+.block-hint--info {
+  border-left-color: var(--hint-info);
+  background: color-mix(in srgb, var(--hint-info) 8%, transparent);
+}
+
+.block-hint--success {
+  border-left-color: var(--hint-success);
+  background: color-mix(in srgb, var(--hint-success) 8%, transparent);
+}
+
+.block-hint--warning {
+  border-left-color: var(--hint-warning);
+  background: color-mix(in srgb, var(--hint-warning) 8%, transparent);
+}
+
+.block-hint--danger {
+  border-left-color: var(--hint-danger);
+  background: color-mix(in srgb, var(--hint-danger) 8%, transparent);
+}
+
+[data-theme="dark"] .block-hint--info {
+  background: color-mix(in srgb, var(--hint-info) 14%, transparent);
+}
+
+[data-theme="dark"] .block-hint--success {
+  background: color-mix(in srgb, var(--hint-success) 14%, transparent);
+}
+
+[data-theme="dark"] .block-hint--warning {
+  background: color-mix(in srgb, var(--hint-warning) 14%, transparent);
+}
+
+[data-theme="dark"] .block-hint--danger {
+  background: color-mix(in srgb, var(--hint-danger) 14%, transparent);
+}
+
+/* ---- block-expandable ---- */
+
+.block-expandable {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  margin: 16px 0;
+  overflow: hidden;
+}
+
+.block-expandable__summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 12px 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.block-expandable__summary::-webkit-details-marker {
+  display: none;
+}
+
+.block-expandable__summary::after {
+  content: '';
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  margin-left: 12px;
+  border-right: 2px solid var(--text-muted);
+  border-bottom: 2px solid var(--text-muted);
+  transform: rotate(-45deg);
+  transition: transform 150ms ease;
+}
+
+.block-expandable[open] .block-expandable__summary::after {
+  transform: rotate(45deg);
+}
+
+.block-expandable__content {
+  padding: 0 16px 16px;
+}
+
+.block-expandable__content > :first-child {
+  margin-top: 0;
+}
+
+/* ---- block-stepper ---- */
+
+.block-stepper {
+  counter-reset: block-stepper-step;
+  margin: 16px 0;
+}
+
+.block-stepper__step {
+  counter-increment: block-stepper-step;
+  position: relative;
+  padding-left: 40px;
+  padding-bottom: 24px;
+}
+
+.block-stepper__step:last-child {
+  padding-bottom: 0;
+}
+
+.block-stepper__step::before {
+  content: counter(block-stepper-step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 28px;
+  text-align: center;
+}
+
+.block-stepper__step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 13px;
+  top: 28px;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+
+.block-stepper__step-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.block-stepper__step-content > :first-child {
+  margin-top: 0;
+}
+
+/* ---- block-cards ---- */
+
+.block-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--grid-gap-desktop);
+  margin: 16px 0;
+}
+
+.block-cards__card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 16px;
+}
+
+.block-cards__card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.block-cards__card-title {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.block-cards__card-content > :first-child {
+  margin-top: 0;
+}
+
+@media (max-width: 640px) {
+  .block-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- block-figure ---- */
+
+.block-figure {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 16px;
+  margin: 16px 0;
+  text-align: center;
+}
+
+.block-figure img {
+  max-width: 100%;
+  border-radius: var(--radius-inline-code);
+}
+
+.block-figure img[data-zoomable] {
+  cursor: zoom-in;
+}
+
+.block-figure figcaption {
+  margin-top: 8px;
+  color: var(--text-muted);
+  font-size: var(--font-size-toc-item);
+}
+
+/* Light/dark variants are both emitted at build time and swapped via CSS (token
+   inheritance), not JS — same pattern as R02's block-cards theme handling. */
+.block-figure__dark {
+  display: none;
+}
+
+[data-theme="dark"] .block-figure .block-figure__light {
+  display: none;
+}
+
+[data-theme="dark"] .block-figure .block-figure__dark {
+  display: block;
+}
+
+/* ---- figure-zoom overlay ---- */
+
+.figure-zoom-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.figure-zoom-overlay.is-open {
+  display: flex;
+}
+
+.figure-zoom-overlay__img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: var(--radius-card);
+  cursor: zoom-out;
+}
+
+/* ---- block-tabs ---- */
+
+.block-tabs {
+  margin: 16px 0;
+}
+
+.block-tabs__list {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+
+.block-tabs__button {
+  appearance: none;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 8px 12px;
+  margin-bottom: -1px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.block-tabs__button.is-active {
+  color: var(--accent-text);
+  border-bottom-color: var(--accent);
+}
+
+/* Before tabs.js runs, only the first panel is visible so the block still
+   renders sensibly with no JS; tabs.js then drives visibility via .is-active. */
+.block-tabs__tab {
+  display: none;
+}
+
+.block-tabs__tab:first-of-type {
+  display: block;
+}
+
+.block-tabs__tab.is-active {
+  display: block;
+}
+
+/* ---- block-code ---- */
+
+.block-code {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  margin: 16px 0;
+  overflow: hidden;
+  background: var(--code-bg);
+}
+
+.block-code__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: var(--code-bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.block-code__lang {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-toc-item);
+  color: var(--text-muted);
+  text-transform: lowercase;
+}
+
+.block-code__copy {
+  appearance: none;
+  background: none;
+  border: none;
+  border-radius: var(--radius-button);
+  padding: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.block-code__copy:hover {
+  color: var(--text);
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+}
+
+.block-code__copy.is-copied {
+  color: var(--hint-success);
+}
+
+.block-code__copy.is-copied svg {
+  display: none;
+}
+
+.block-code__copy::after {
+  content: '';
+  display: none;
+}
+
+.block-code__copy.is-copied::after {
+  content: '\2713';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* Dual-theme Shiki output: `defaultColor: false` (markdown.mjs) emits every
+   token as `--shiki-light`/`--shiki-dark` CSS variables with no baked-in
+   color, per shiki.style's documented approach — consume them here instead
+   of adding new tokens. */
+.block-code .shiki,
+.block-code .shiki span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+[data-theme="dark"] .block-code .shiki,
+[data-theme="dark"] .block-code .shiki span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+}
+
+.block-code pre.shiki {
+  margin: 0;
+  padding: 16px 0;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-toc-item);
+  line-height: 1.6;
+}
+
+.block-code pre.shiki code {
+  counter-reset: block-code-line;
+}
+
+/* Line numbers via a CSS counter, same technique as `.block-stepper`'s
+   counter above — the number is drawn by `::before`, never inserted into
+   the line's own text, so `.block-code__copy`'s `data-code` (plain source
+   only) never picks it up. */
+.block-code pre.shiki .line {
+  counter-increment: block-code-line;
+  display: inline-block;
+  width: 100%;
+  padding: 0 16px 0 48px;
+  position: relative;
+}
+
+.block-code pre.shiki .line::before {
+  content: counter(block-code-line);
+  position: absolute;
+  left: 16px;
+  top: 0;
+  width: 24px;
+  text-align: right;
+  color: var(--text-muted);
+  opacity: .5;
+  user-select: none;
+}
+
+.block-code pre.shiki .line.is-highlighted {
+  background: var(--accent-bg);
+}
+
+.block-code pre.shiki .line.is-diff-add {
+  background: color-mix(in srgb, var(--hint-success) 8%, transparent);
+}
+
+.block-code pre.shiki .line.is-diff-remove {
+  background: color-mix(in srgb, var(--hint-danger) 8%, transparent);
+}
+
+[data-theme="dark"] .block-code pre.shiki .line.is-diff-add {
+  background: color-mix(in srgb, var(--hint-success) 14%, transparent);
+}
+
+[data-theme="dark"] .block-code pre.shiki .line.is-diff-remove {
+  background: color-mix(in srgb, var(--hint-danger) 14%, transparent);
+}

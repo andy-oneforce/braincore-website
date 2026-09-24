@@ -1,0 +1,1161 @@
+/**
+ * ASIOS Website — Base / Prose Styles
+ * Assumes tokens.css is loaded first.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--text);
+  background: var(--bg);
+}
+
+h1 {
+  font-size: var(--font-size-title);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.page-description {
+  font-size: var(--font-size-description);
+  color: var(--text-muted);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border);
+  margin-top: 48px;
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+  font-weight: 600;
+  margin-top: 32px;
+}
+
+/* :not(pre) scope keeps this off Shiki's own `pre.shiki code` wrapper
+   (R03/blocks.css styles that element itself) — otherwise every highlighted
+   line would also pick up this background/padding/radius. */
+:not(pre) > code {
+  background: var(--code-bg);
+  border-radius: var(--radius-inline-code);
+  padding: 2px 6px;
+  font-size: 0.9em;
+  font-family: var(--font-mono);
+}
+
+a {
+  color: var(--accent-text);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 8px;
+  z-index: 100;
+  padding: 8px 16px;
+  border-radius: var(--radius-button);
+  background: var(--accent-on-light);
+  color: #fff;
+  box-shadow: var(--shadow-card-hover);
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-base) 0;
+}
+
+th,
+td {
+  padding: var(--space-base) calc(var(--space-base) * 2);
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+th {
+  font-weight: 600;
+  background: var(--bg-sidebar);
+}
+
+blockquote {
+  margin: var(--space-base) 0;
+  padding: var(--space-base) calc(var(--space-base) * 2);
+  border-left: 4px solid var(--border);
+  color: var(--text-muted);
+}
+
+blockquote > :first-child {
+  margin-top: 0;
+}
+
+blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+ul,
+ol {
+  margin: var(--space-base) 0;
+  padding-left: calc(var(--space-base) * 3);
+}
+
+ul ul,
+ul ol,
+ol ul,
+ol ol {
+  margin: 0;
+  padding-left: calc(var(--space-base) * 3);
+}
+
+li + li {
+  margin-top: var(--space-base);
+}
+
+kbd {
+  display: inline-block;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-inline-code);
+  padding: 2px 6px;
+  font-size: 0.85em;
+  font-family: var(--font-mono);
+  box-shadow: 0 1px 0 var(--border);
+}
+
+sup.footnote-ref {
+  font-size: 0.75em;
+  color: var(--accent-text);
+}
+
+section.footnotes {
+  margin-top: calc(var(--space-base) * 3);
+  padding-top: var(--space-base);
+  border-top: 1px solid var(--border);
+  font-size: 0.9em;
+}
+
+.footnote-item {
+  color: var(--text-muted);
+}
+
+.footnote-backref {
+  color: var(--accent-text);
+  text-decoration: underline;
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+}
+
+.card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.hint {
+  border-left: 4px solid;
+  padding: 12px 16px;
+  border-radius: 4px;
+}
+
+.hint-info {
+  border-left-color: var(--hint-info);
+  background: rgba(59, 130, 246, .08);
+}
+
+.hint-success {
+  border-left-color: var(--hint-success);
+  background: rgba(34, 197, 94, .08);
+}
+
+.hint-warning {
+  border-left-color: var(--hint-warning);
+  background: rgba(245, 158, 11, .08);
+}
+
+.hint-danger {
+  border-left-color: var(--hint-danger);
+  background: rgba(239, 68, 68, .08);
+}
+
+.tag {
+  display: inline-block;
+  background: var(--accent-bg);
+  color: var(--accent);
+  border-radius: var(--tag-radius);
+  font-size: 12px;
+  padding: 2px 10px;
+}
+
+.button {
+  border-radius: var(--radius-button);
+  background: var(--accent);
+  color: #fff;
+  padding: 8px 16px;
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  z-index: 10;
+}
+
+.site-header .site-logo {
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.site-header .site-nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-left: 16px;
+}
+
+.drawer-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--text);
+}
+
+/* Space variant beside the logo (Header.mjs): a plain title for a single space, a CSS-only
+   <details> dropdown for 2+. Auto margins hug it to the logo and push .site-nav right. */
+.site-header .space-title,
+.site-header .space-switcher {
+  margin: 0 auto 0 16px;
+  min-width: 0;
+}
+
+.site-header .space-title {
+  color: var(--text-muted);
+  font-size: var(--font-size-sidebar-item);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.space-switcher {
+  position: relative;
+  font-size: var(--font-size-sidebar-item);
+}
+
+.space-switcher summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  color: var(--text-muted);
+  background: var(--bg-sidebar);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-button);
+  cursor: pointer;
+  list-style: none;
+  white-space: nowrap;
+}
+
+.space-switcher summary::-webkit-details-marker {
+  display: none;
+}
+
+.space-switcher summary::after {
+  content: '▾';
+  font-size: 11px;
+}
+
+.space-switcher summary:hover,
+.space-switcher[open] summary {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.space-switcher ul {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 200px;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card-hover);
+  z-index: 30;
+}
+
+.space-switcher li a {
+  display: block;
+  padding: 6px 10px;
+  color: var(--text);
+  text-decoration: none;
+  border-radius: var(--radius-button);
+}
+
+.space-switcher li a:hover {
+  background: var(--accent-bg);
+}
+
+.space-switcher li a[aria-current="true"] {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .5);
+  z-index: 15;
+}
+
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-button);
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+/* Search (⌘K) — trigger button lives in the header; modal is appended once per page right
+   after </header> by Header.mjs. search.js drives all interaction. */
+.search-trigger {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-button);
+  cursor: pointer;
+  padding: 4px 8px;
+  margin-left: 16px;
+  color: var(--text);
+}
+
+.search-trigger-hint {
+  font-size: 0.75em;
+  color: var(--text-muted);
+}
+
+.search-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .5);
+  z-index: 40;
+}
+
+.search-modal {
+  position: fixed;
+  top: 10vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(600px, 90vw);
+  max-height: 70vh;
+  display: flex;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card-hover);
+  z-index: 41;
+}
+
+.search-modal-inner {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  width: 100%;
+}
+
+.search-input {
+  border: none;
+  border-bottom: 1px solid var(--border);
+  padding: 16px;
+  font-size: 1rem;
+  color: var(--text);
+  background: transparent;
+}
+
+.search-input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.search-recent,
+.search-results {
+  overflow-y: auto;
+  padding: 0 16px 16px;
+}
+
+.search-recent-label,
+.search-result-group-label {
+  font-size: 0.75em;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--text-muted);
+  margin: 12px 0 4px;
+}
+
+.search-recent-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.search-recent-chip {
+  background: var(--accent-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--tag-radius);
+  padding: 4px 10px;
+  cursor: pointer;
+  color: var(--text);
+  font-size: 0.85em;
+}
+
+.search-result-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.search-result-item a {
+  display: block;
+  padding: 8px 10px;
+  border-radius: var(--radius-button);
+  text-decoration: none;
+  color: var(--text);
+}
+
+.search-result-title {
+  display: block;
+  font-weight: 600;
+}
+
+.search-result-excerpt {
+  display: block;
+  font-size: 0.85em;
+  color: var(--text-muted);
+}
+
+.search-result-item.is-selected a,
+.search-result-item a:hover {
+  background: var(--accent-bg);
+}
+
+.search-no-results {
+  color: var(--text-muted);
+  padding: 16px;
+}
+
+.site-footer {
+  padding: 24px;
+  text-align: center;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+}
+
+/* Docs sidebar — markup/CSS shape matches the User-approved mockup
+   (Output/mockups/doc-page.html); sidebar.js click/keyboard island lands in a later chunk. */
+.docs-frame {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  min-height: calc(100vh - var(--header-height));
+}
+
+.sidebar {
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+  padding: 24px 16px;
+  font-size: var(--font-size-sidebar-item);
+  overflow-y: auto;
+}
+
+.sidebar .group {
+  margin-bottom: 4px;
+}
+
+.sidebar .group-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.sidebar .group-label .chevron {
+  transition: transform 150ms ease;
+  font-size: 10px;
+}
+
+.sidebar .group.open .chevron {
+  transform: rotate(90deg);
+}
+
+.sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 20px;
+}
+
+.sidebar .group:not(.open) > ul {
+  display: none;
+}
+
+.sidebar a {
+  display: block;
+  padding: 6px 8px;
+  border-radius: var(--radius-inline-code);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  background: var(--accent-bg);
+  text-decoration: none;
+}
+
+.sidebar a.active {
+  background: var(--accent-bg);
+  color: var(--accent-text);
+  font-weight: 600;
+  position: relative;
+}
+
+.sidebar a.active::before {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: 4px;
+  bottom: 4px;
+  width: 2px;
+  background: var(--accent);
+}
+
+/* Breadcrumb trail above the page H1 (Breadcrumbs.mjs). Separators are CSS, not markup. */
+.breadcrumbs {
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumbs li + li::before {
+  content: "›";
+  margin-right: 8px;
+}
+
+.breadcrumbs a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+/* Previous / next pager under the page body (PageNav.mjs). A lone side still sits on its own edge. */
+.page-nav {
+  display: flex;
+  gap: 16px;
+  margin-top: 48px;
+}
+
+.page-nav a {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 0 1 calc(50% - 8px);
+  padding: 14px 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.page-nav a:hover {
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+.page-nav-prev {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.page-nav-next {
+  align-items: flex-end;
+  text-align: right;
+  margin-left: auto;
+}
+
+.page-nav-label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.page-nav-title {
+  font-weight: 600;
+  color: var(--accent-text);
+}
+
+/* Page footer under the pager (LastUpdated.mjs + EditLink.mjs): "Last updated <date>" and an
+   "Edit this page" link on one muted line, wrapping on narrow screens. */
+.page-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-base) calc(var(--space-base) * 3);
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 32px;
+  padding-top: calc(var(--space-base) * 2);
+  border-top: 1px solid var(--border);
+  font-size: var(--font-size-sidebar-item);
+  color: var(--text-muted);
+}
+
+.page-meta p {
+  margin: 0;
+}
+
+/* --accent on --bg is 4.48:1 in the dark theme, under AA for 14px text, so the link takes the body
+   text colour and keeps the accent as its underline. */
+.page-meta a {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+.page-meta a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Page actions under the page heading (PageActions.mjs): Copy as Markdown + Open in Claude/ChatGPT.
+   Wraps on narrow screens; the status line (copy fallback message) takes its own row when long.
+   Text takes --text, not --accent, for the same dark-theme contrast reason as .page-meta a. */
+.page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-base);
+  align-items: center;
+  margin: 0 0 calc(var(--space-base) * 2);
+  font-size: var(--font-size-sidebar-item);
+}
+
+.page-actions [hidden] {
+  display: none;
+}
+
+.page-actions__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--space-base) / 2) calc(var(--space-base) * 1.5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-button);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  line-height: 1.5;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.page-actions__btn:hover {
+  background: var(--accent-bg);
+  border-color: var(--accent);
+}
+
+.page-actions__btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.page-actions__btn.is-copied {
+  border-color: var(--hint-success);
+}
+
+.page-actions__status {
+  color: var(--text-muted);
+}
+
+.page-actions__status:empty {
+  display: none;
+}
+
+.page-actions__status a {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+/* Docs "Was this page helpful?" widget (Feedback.mjs) at the end of the article. Buttons match
+   .page-actions__btn; the status line is an aria-live region that takes no space while empty.
+   Text takes --text, not --accent, for the same dark-theme contrast reason as .page-meta a. */
+.feedback {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-base) calc(var(--space-base) * 2);
+  align-items: center;
+  margin: calc(var(--space-base) * 5) 0 calc(var(--space-base) * 3);
+  padding-top: calc(var(--space-base) * 3);
+  border-top: 1px solid var(--border);
+  font-size: var(--font-size-sidebar-item);
+}
+
+.feedback__question {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.feedback__actions {
+  display: flex;
+  gap: var(--space-base);
+}
+
+.feedback__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: calc(var(--space-base) * 7);
+  padding: calc(var(--space-base) / 2) calc(var(--space-base) * 1.5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-button);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.feedback__btn:hover:not([aria-disabled="true"]) {
+  background: var(--accent-bg);
+  border-color: var(--accent);
+}
+
+.feedback__btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.feedback__btn[aria-disabled="true"] {
+  cursor: default;
+  color: var(--text-muted);
+}
+
+.feedback__btn[aria-pressed="true"] {
+  border-color: var(--hint-success);
+  color: var(--text);
+}
+
+.feedback__status {
+  color: var(--text-muted);
+}
+
+/* Empty, the live region is clipped to nothing but stays in the accessibility tree: a region that goes
+   display:none -> visible together with its text is announced unreliably, so it must exist beforehand. */
+.feedback__status:empty {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.feedback__status.is-error {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--hint-danger);
+  text-underline-offset: 3px;
+}
+
+/* Shared 404 page (NotFound.mjs) — centred empty-state body between the site header and footer. */
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-base);
+  min-height: 50vh;
+  padding: calc(var(--space-base) * 6) var(--space-base);
+  text-align: center;
+}
+
+.not-found__body {
+  margin: 0;
+  max-width: 40ch;
+  color: var(--text-muted);
+}
+
+.not-found__home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--space-base);
+  padding: calc(var(--space-base) / 2) calc(var(--space-base) * 1.5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-button);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.not-found__home:hover {
+  background: var(--accent-bg);
+  border-color: var(--accent);
+}
+
+.not-found__home:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .docs-frame {
+    grid-template-columns: 1fr;
+  }
+
+  .drawer-toggle {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Marketing/blog top nav (Home/Pricing/About/Blog) has no drawer of its own at this width —
+     hide it rather than wrap, and drop the ⌘K hint so the search trigger shrinks to icon-only. */
+  .site-header .site-nav {
+    display: none;
+  }
+
+  .search-trigger-hint {
+    display: none;
+  }
+
+  /* Keep the space label from colliding with the drawer toggle: it shrinks and ellipsizes, and
+     the header's top-level nav links yield to it. */
+  .site-header .space-title,
+  .site-header .space-switcher {
+    margin-left: 8px;
+    max-width: 40vw;
+  }
+
+  .site-header .space-switcher summary {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    bottom: 0;
+    width: min(80vw, 320px);
+    z-index: 20;
+    box-shadow: var(--shadow-card-hover);
+    transform: translateX(-100%);
+    transition: transform 200ms ease;
+  }
+
+  .sidebar.drawer-open {
+    transform: translateX(0);
+  }
+
+  .page-nav {
+    flex-direction: column;
+  }
+
+  .page-nav a {
+    flex-basis: auto;
+  }
+
+  .page-nav-next {
+    margin-left: 0;
+  }
+}
+
+/* "On this page" table of contents (Toc.mjs). One list, two renders: a sticky right-hand rail
+   (`.toc`, third `.docs-frame` column, only when the page has a Toc) at >= 1024px, and a
+   `<details class="toc-dropdown">` at the top of the article below that. Placed after the 768px
+   block above on purpose: `.docs-frame.has-toc` outranks `.docs-frame` there, so the one-column
+   collapse is restated for it at the end of this section. */
+.docs-frame.has-toc {
+  grid-template-columns: var(--sidebar-width) minmax(0, 1fr) var(--toc-width);
+}
+
+.docs-content h2,
+.docs-content h3 {
+  scroll-margin-top: calc(var(--header-height) + 16px);
+}
+
+.toc {
+  position: sticky;
+  top: var(--header-height);
+  align-self: start;
+  max-height: calc(100vh - var(--header-height));
+  overflow-y: auto;
+  padding: 24px 16px 24px 8px;
+  font-size: var(--font-size-toc-item);
+}
+
+.toc-title {
+  margin: 0 0 8px;
+  padding: 0 8px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.toc ol,
+.toc-dropdown ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.toc ol ol,
+.toc-dropdown ol ol {
+  padding-left: 14px;
+}
+
+.toc a,
+.toc-dropdown a {
+  display: block;
+  padding: 4px 8px;
+  border-radius: var(--radius-inline-code);
+  color: var(--text-muted);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.toc a:hover,
+.toc-dropdown a:hover {
+  background: var(--accent-bg);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* Scroll-spy state (toc.js): the link of the heading currently in view. An inset bar rather than
+   a weight change, so the active row never reflows the list. */
+.toc .active,
+.toc-dropdown .active {
+  background: var(--accent-bg);
+  color: var(--accent-text);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+.toc-dropdown {
+  display: none;
+  margin: 0 0 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  font-size: var(--font-size-toc-item);
+}
+
+.toc-dropdown summary {
+  padding: 10px 14px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.toc-dropdown ol {
+  padding: 0 8px 10px;
+}
+
+@media (max-width: 1023px) {
+  .docs-frame.has-toc {
+    grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+  }
+
+  .toc {
+    display: none;
+  }
+
+  .toc-dropdown {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .docs-frame.has-toc {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Blog post frame (Phase 5.3) — content + the SAME Toc rail/dropdown pair docs pages use
+   (`.toc`/`.toc-dropdown`, reused via `docs/Toc.mjs`), just without the sidebar column: blog posts
+   carry no nav tree, so this is its own two-column grid rather than reusing `.docs-frame`, whose
+   `sidebar-width` column would otherwise swallow `<main>` with no `<aside>` to fill it. */
+.blog-frame {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.blog-frame.has-toc {
+  grid-template-columns: minmax(0, 1fr) var(--toc-width);
+  gap: calc(var(--space-base) * 3);
+  max-width: calc(var(--content-max-width) + var(--toc-width) + var(--space-base) * 3);
+}
+
+.blog-frame article h2,
+.blog-frame article h3 {
+  scroll-margin-top: calc(var(--header-height) + 16px);
+}
+
+@media (max-width: 1023px) {
+  .blog-frame.has-toc {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: var(--content-max-width);
+  }
+}
+
+/* Related posts (RelatedPosts.mjs), after the article — tag-overlap picks only, so an untagged
+   post (or one sharing no tag with any sibling) gets no section at all. */
+.related-posts {
+  margin-top: calc(var(--space-base) * 5);
+  padding-top: calc(var(--space-base) * 3);
+  border-top: 1px solid var(--border);
+}
+
+.related-posts h2 {
+  margin-top: 0;
+  border-bottom: none;
+}
+
+.related-posts ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* --accent on --bg is 4.48:1 in the dark theme, under AA for normal text, so the link takes the
+   body text colour and keeps the accent as its underline — same fix as .page-meta a. */
+.related-posts a {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+/* Blog listing tag filter (BlogLayout.mjs's renderTagFilter + tag-filter.js), main /blog/ page
+   only — toggle buttons filter `.post-list` client-side and sync the selection into the URL query
+   string. Buttons are a working (if inert) list before the script runs. */
+.tag-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-base);
+  align-items: center;
+  margin: 0 0 calc(var(--space-base) * 2);
+}
+
+.tag-filter__label {
+  font-size: var(--font-size-sidebar-item);
+  color: var(--text-muted);
+}
+
+.tag-filter__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--space-base) / 2);
+}
+
+.tag-filter__btn {
+  padding: calc(var(--space-base) / 2) calc(var(--space-base) * 1.5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-button);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: var(--font-size-sidebar-item);
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.tag-filter__btn:hover {
+  background: var(--accent-bg);
+  border-color: var(--accent);
+}
+
+.tag-filter__btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.tag-filter__btn[aria-pressed="true"] {
+  background: var(--accent-bg);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+.tag-filter__empty {
+  color: var(--text-muted);
+  font-size: var(--font-size-sidebar-item);
+}
+
+.tag-filter__empty[hidden] {
+  display: none;
+}
